@@ -23,6 +23,21 @@ jobs:
       - task: NodeTool@0
         inputs:
           versionSpec: '10.x'
+      - task: RestoreCache@0
+        inputs:
+          key: |
+            package.json
+            yarn.lock
+          paths: |
+            node_modules
+      - script: yarn --verbose --prefer-offline
+      - task: SaveCache@0
+        inputs:
+          key: |
+            package.json
+            yarn.lock
+          paths: |
+            node_modules
       - bash: |
           set -euo pipefail
           echo "$(DOCKER_PASSWORD)" | docker login -u "$(DOCKER_USERNAME)" --password-stdin
