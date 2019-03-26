@@ -25,7 +25,7 @@ jobs:
           versionSpec: '10.x'
       - bash: |
           set -euo pipefail
-          echo "$(DOCKER_PASSWORD)" | docker login -u "$(DOCKER_USERNAME)" --password-stdin
+          docker login -u "$(DOCKER_USERNAME)" -p "$(DOCKER_PASSWORD)"
           docker pull augurproject/augur-build:latest
           yarn docker:build:augur
           docker images
@@ -68,7 +68,7 @@ jobs:
           which node
           node --version
           docker images
-          echo "$(DOCKER_PASSWORD)" | docker login -u "$(DOCKER_USERNAME)" --password-stdin
+          docker login -u "$(DOCKER_USERNAME)" -p "$(DOCKER_PASSWORD)"
           docker pull augurproject/augur-build:$(DOCKER_CI_BUILD_TAG)
           docker tag augurproject/augur-build:$(DOCKER_CI_BUILD_TAG) augurproject/augur-build:latest
           yarn workspace @augurproject/core docker:build:python2-and-3
@@ -260,7 +260,7 @@ jobs:
 #         done
 #   - script: |
 #       set -exuo pipefail
-#       echo "$(DOCKER_PASSWORD)" | docker login -u "$(DOCKER_USERNAME)" --password-stdin
+#       docker login -u "$(DOCKER_USERNAME)" -p "$(DOCKER_PASSWORD)"
 #       sudo modprobe -r overlay && sudo modprobe overlay redirect_dir=off && sudo systemctl restart docker
 #       sudo systemctl status docker
 #       docker pull augurproject/augur-build:$(DOCKER_CI_BUILD_TAG)
@@ -296,7 +296,7 @@ jobs:
     steps:
     - script: |
         set -euo pipefail
-        echo "$(DOCKER_PASSWORD)" | docker login -u "$(DOCKER_USERNAME)" --password-stdin
+        docker login -u "$(DOCKER_USERNAME)" -p "$(DOCKER_PASSWORD)"
         docker pull augurproject/augur-build:$(DOCKER_CI_BUILD_TAG)
         docker tag augurproject/augur-build:$(DOCKER_CI_BUILD_TAG) augurproject/augur-build:latest
         docker images
