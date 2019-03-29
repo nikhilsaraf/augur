@@ -1,9 +1,8 @@
-const Augur = require("augur.js");
-
-const { BigNumber } = require("bignumber.js");
-const setupTestDb = require("test.database");
-const { processInitialReportSubmittedLog, processInitialReportSubmittedLogRemoval } = require("src/blockchain/log-processors/initial-report-submitted");
-const { setOverrideTimestamp, removeOverrideTimestamp } = require("src/blockchain/process-block");
+import Augur from 'augur.js';
+import { BigNumber } from 'bignumber.js';
+import setupTestDb from 'test.database';
+import { processInitialReportSubmittedLog, processInitialReportSubmittedLogRemoval } from 'src/blockchain/log-processors/initial-report-submitted';
+import { setOverrideTimestamp, removeOverrideTimestamp } from 'src/blockchain/process-block';
 
 function getReportingState(db, log) {
   return db("markets").first(["reportingState", "initialReportSize", "marketCreatorFeesBalance"]).where("markets.marketId", log.market).join("market_state", "market_state.marketStateId", "markets.marketStateId");

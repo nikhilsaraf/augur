@@ -1,5 +1,9 @@
-const setupTestDb = require("test.database");
-const { processReportingParticipantDisavowedLog, processReportingParticipantDisavowedLogRemoval } = require("src/blockchain/log-processors/reporting-participant-disavowed");
+import setupTestDb from 'test.database';
+
+import {
+  processReportingParticipantDisavowedLog,
+  processReportingParticipantDisavowedLogRemoval,
+} from 'src/blockchain/log-processors/reporting-participant-disavowed';
 
 async function getParticipantState(db, log) {
   return {

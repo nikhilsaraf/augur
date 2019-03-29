@@ -1,8 +1,8 @@
-const Augur = require("augur.js");
-const { BigNumber } = require("bignumber.js");
-const setupTestDb = require("test.database");
-const { processMarketCreatedLog, processMarketCreatedLogRemoval } = require("src/blockchain/log-processors/market-created");
-const { getMarketsWithReportingState } = require("src/server/getters/database");
+import Augur from 'augur.js';
+import { BigNumber } from 'bignumber.js';
+import setupTestDb from 'test.database';
+import { processMarketCreatedLog, processMarketCreatedLogRemoval } from 'src/blockchain/log-processors/market-created';
+import { getMarketsWithReportingState } from 'src/server/getters/database';
 
 async function getState(db, log) {
   return {

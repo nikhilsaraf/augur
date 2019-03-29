@@ -1,5 +1,5 @@
-const setupTestDb = require("../../test.database");
-const { processDisputeWindowCreatedLog, processDisputeWindowCreatedLogRemoval } = require("src/blockchain/log-processors/dispute-window-created");
+import setupTestDb from '../../test.database';
+import { processDisputeWindowCreatedLog, processDisputeWindowCreatedLogRemoval } from 'src/blockchain/log-processors/dispute-window-created';
 
 async function getDisputeWindow(db, log) {
   return {

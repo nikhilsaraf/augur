@@ -1,6 +1,11 @@
-const setupTestDb = require("test.database");
-const { processCompleteSetsPurchasedOrSoldLog, processCompleteSetsPurchasedOrSoldLogRemoval } = require("src/blockchain/log-processors/completesets");
-const Augur = require("augur.js");
+import setupTestDb from 'test.database';
+
+import {
+  processCompleteSetsPurchasedOrSoldLog,
+  processCompleteSetsPurchasedOrSoldLogRemoval,
+} from 'src/blockchain/log-processors/completesets';
+
+import Augur from 'augur.js';
 const augur = new Augur();
 
 function getState(db, log) {

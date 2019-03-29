@@ -1,8 +1,8 @@
-const environments = require("knexfile.js");
-const Knex = require("knex");
-const { postProcessDatabaseResults } = require("src/server/post-process-database-results");
+import environments from 'knexfile.js';
+import Knex from 'knex';
+import { postProcessDatabaseResults } from 'src/server/post-process-database-results';
 
-module.exports = () => {
+export default () => {
   const env = Object.assign({}, environments.test, {
     postProcessResponse: postProcessDatabaseResults,
   });

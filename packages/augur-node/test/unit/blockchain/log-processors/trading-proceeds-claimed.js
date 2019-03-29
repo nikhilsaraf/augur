@@ -1,6 +1,6 @@
-const { BigNumber } = require("bignumber.js");
-const setupTestDb = require("test.database");
-const { processTradingProceedsClaimedLog, processTradingProceedsClaimedLogRemoval } = require("src/blockchain/log-processors/trading-proceeds-claimed");
+import { BigNumber } from 'bignumber.js';
+import setupTestDb from 'test.database';
+import { processTradingProceedsClaimedLog, processTradingProceedsClaimedLogRemoval } from 'src/blockchain/log-processors/trading-proceeds-claimed';
 
 function getTradingProceeds(db) {
   return db.select(["marketId", "shareToken", "account", "numShares", "numPayoutTokens"]).from("trading_proceeds");

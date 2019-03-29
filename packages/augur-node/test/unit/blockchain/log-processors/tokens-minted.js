@@ -1,6 +1,6 @@
-const setupTestDb = require("test.database");
-const { BigNumber } = require("bignumber.js");
-const { processMintLog, processMintLogRemoval } = require("src/blockchain/log-processors/token/mint");
+import setupTestDb from 'test.database';
+import { BigNumber } from 'bignumber.js';
+import { processMintLog, processMintLogRemoval } from 'src/blockchain/log-processors/token/mint';
 
 function getTokenBalances(db, log) {
   return db.select(["balances.owner", "balances.token", "balances.balance", "token_supply.supply"]).from("balances").join("token_supply", "balances.token", "token_supply.token").where("balances.token", log.token);

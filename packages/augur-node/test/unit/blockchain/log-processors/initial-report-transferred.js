@@ -1,7 +1,10 @@
-const Augur = require("augur.js");
+import Augur from 'augur.js';
+import setupTestDb from 'test.database';
 
-const setupTestDb = require("test.database");
-const { processInitialReporterTransferredLog, processInitialReporterTransferredLogRemoval } = require("src/blockchain/log-processors/initial-report-transferred");
+import {
+  processInitialReporterTransferredLog,
+  processInitialReporterTransferredLogRemoval,
+} from 'src/blockchain/log-processors/initial-report-transferred';
 
 function getInitialReport(db, log) {
   return db("initial_reports").first(["reporter"]).where("initial_reports.marketId", log.market);

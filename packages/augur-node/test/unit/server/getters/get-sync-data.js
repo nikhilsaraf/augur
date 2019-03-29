@@ -1,6 +1,6 @@
-const setupTestDb = require("test.database");
-const { dispatchJsonRpcRequest } = require("src/server/dispatch-json-rpc-request");
-const { version } = require("src/version");
+import setupTestDb from 'test.database';
+import { dispatchJsonRpcRequest } from 'src/server/dispatch-json-rpc-request';
+import { version } from 'src/version';
 
 describe("server/getters/get-sync-data", () => {
   let db;

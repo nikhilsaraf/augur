@@ -1,5 +1,9 @@
-const setupTestDb = require("test.database");
-const { processMarketParticipantsDisavowedLog, processMarketParticipantsDisavowedLogRemoval } = require("src/blockchain/log-processors/market-participants-disavowed");
+import setupTestDb from 'test.database';
+
+import {
+  processMarketParticipantsDisavowedLog,
+  processMarketParticipantsDisavowedLogRemoval,
+} from 'src/blockchain/log-processors/market-participants-disavowed';
 
 function getMarketCrowdsourcers(db, log) {
   return db("crowdsourcers").where({ marketId: log.market });

@@ -1,8 +1,8 @@
-const { fix } = require("speedomatic");
-const setupTestDb = require("test.database");
-const { BigNumber } = require("bignumber.js");
-const { processOrderCreatedLog, processOrderCreatedLogRemoval } = require("src/blockchain/log-processors/order-created");
-const Augur = require("augur.js");
+import { fix } from 'speedomatic';
+import setupTestDb from 'test.database';
+import { BigNumber } from 'bignumber.js';
+import { processOrderCreatedLog, processOrderCreatedLogRemoval } from 'src/blockchain/log-processors/order-created';
+import Augur from 'augur.js';
 
 function getState(db, log) {
   return db("orders").where("orderId", log.orderId);

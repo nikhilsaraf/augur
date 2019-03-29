@@ -1,5 +1,5 @@
-const setupTestDb = require("test.database");
-const { processApprovalLog, processApprovalLogRemoval } = require("src/blockchain/log-processors/token/approval");
+import setupTestDb from 'test.database';
+import { processApprovalLog, processApprovalLogRemoval } from 'src/blockchain/log-processors/token/approval';
 
 function getState(db, log) {
   return db("approvals").where({ transactionHash: log.transactionHash, logIndex: log.logIndex });

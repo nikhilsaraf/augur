@@ -1,14 +1,18 @@
-const Augur = require("augur.js");
-const setupTestDb = require("test.database");
-const { BigNumber } = require("bignumber.js");
-const {
-  processDisputeCrowdsourcerCreatedLog, processDisputeCrowdsourcerCreatedLogRemoval,
-  processDisputeCrowdsourcerContributionLog, processDisputeCrowdsourcerContributionLogRemoval,
-  processDisputeCrowdsourcerCompletedLog, processDisputeCrowdsourcerCompletedLogRemoval,
-}
-  = require("src/blockchain/log-processors/crowdsourcer");
-const { getMarketsWithReportingState } = require("src/server/getters/database");
-const { setOverrideTimestamp, removeOverrideTimestamp } = require("src/blockchain/process-block");
+import Augur from 'augur.js';
+import setupTestDb from 'test.database';
+import { BigNumber } from 'bignumber.js';
+
+import {
+  processDisputeCrowdsourcerCreatedLog,
+  processDisputeCrowdsourcerCreatedLogRemoval,
+  processDisputeCrowdsourcerContributionLog,
+  processDisputeCrowdsourcerContributionLogRemoval,
+  processDisputeCrowdsourcerCompletedLog,
+  processDisputeCrowdsourcerCompletedLogRemoval,
+} from 'src/blockchain/log-processors/crowdsourcer';
+
+import { getMarketsWithReportingState } from 'src/server/getters/database';
+import { setOverrideTimestamp, removeOverrideTimestamp } from 'src/blockchain/process-block';
 
 function getCrowdsourcer(db, log) {
   return db("crowdsourcers").first(

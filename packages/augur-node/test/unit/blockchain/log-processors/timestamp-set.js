@@ -1,6 +1,6 @@
-const setupTestDb = require("test.database");
-const { processTimestampSetLog, processTimestampSetLogRemoval } = require("src/blockchain/log-processors/timestamp-set");
-const { getOverrideTimestamp } = require("src/blockchain/process-block");
+import setupTestDb from 'test.database';
+import { processTimestampSetLog, processTimestampSetLogRemoval } from 'src/blockchain/log-processors/timestamp-set';
+import { getOverrideTimestamp } from 'src/blockchain/process-block';
 
 function initializeNetwork(db) {
   return db.insert({ networkId: 9999 }).into("network_id");

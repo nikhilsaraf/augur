@@ -1,8 +1,8 @@
-const setupTestDb = require("test.database");
-const { processMarketMigratedLog, processMarketMigratedLogRemoval } = require("src/blockchain/log-processors/market-migrated");
-const { getMarketsWithReportingState } = require("src/server/getters/database");
-const ReportingState = require("src/types").ReportingState;
-const updateMarketState = require("src/blockchain/log-processors/database").updateMarketState;
+import setupTestDb from 'test.database';
+import { processMarketMigratedLog, processMarketMigratedLogRemoval } from 'src/blockchain/log-processors/market-migrated';
+import { getMarketsWithReportingState } from 'src/server/getters/database';
+import { ReportingState } from 'src/types';
+import { updateMarketState } from 'src/blockchain/log-processors/database';
 
 function getMarket(db, log) {
   return getMarketsWithReportingState(db, ["markets.marketId", "markets.universe", "markets.needsMigration", "markets.needsDisavowal", "disputeWindow", "reportingState"])

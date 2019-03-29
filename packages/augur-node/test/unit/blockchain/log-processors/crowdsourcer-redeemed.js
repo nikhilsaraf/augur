@@ -1,5 +1,9 @@
-const setupTestDb = require("test.database");
-const { processDisputeCrowdsourcerRedeemedLog, processDisputeCrowdsourcerRedeemedLogRemoval } = require("src/blockchain/log-processors/crowdsourcer");
+import setupTestDb from 'test.database';
+
+import {
+  processDisputeCrowdsourcerRedeemedLog,
+  processDisputeCrowdsourcerRedeemedLogRemoval,
+} from 'src/blockchain/log-processors/crowdsourcer';
 
 function getRedeemed(db) {
   return db.select(["reporter", "crowdsourcer", "amountRedeemed", "repReceived", "reportingFeesReceived"]).from("crowdsourcer_redeemed");

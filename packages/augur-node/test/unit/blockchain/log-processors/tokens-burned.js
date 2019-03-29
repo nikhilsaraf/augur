@@ -1,6 +1,6 @@
-const setupTestDb = require("test.database");
-const { BigNumber } = require("bignumber.js");
-const { processBurnLog, processBurnLogRemoval } = require("src/blockchain/log-processors/token/burn");
+import setupTestDb from 'test.database';
+import { BigNumber } from 'bignumber.js';
+import { processBurnLog, processBurnLogRemoval } from 'src/blockchain/log-processors/token/burn';
 
 function getTokenBalances(db, log) {
   return db.select(["balances.owner", "balances.token", "balances.balance", "token_supply.supply"])

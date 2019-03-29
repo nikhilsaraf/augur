@@ -1,5 +1,5 @@
-const EventEmitter = require("events").EventEmitter;
-const { Subscriptions } = require("src/server/subscriptions");
+import { EventEmitter } from 'events';
+import { Subscriptions } from 'src/server/subscriptions';
 
 describe("server/subscriptions", () => {
   let emitter;

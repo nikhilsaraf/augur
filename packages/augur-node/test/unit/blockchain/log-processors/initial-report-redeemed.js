@@ -1,7 +1,11 @@
-const Augur = require("augur.js");
+import Augur from 'augur.js';
+import setupTestDb from 'test.database';
 
-const setupTestDb = require("test.database");
-const { processInitialReporterRedeemedLog, processInitialReporterRedeemedLogRemoval } = require("src/blockchain/log-processors/initial-report-redeemed");
+import {
+  processInitialReporterRedeemedLog,
+  processInitialReporterRedeemedLogRemoval,
+} from 'src/blockchain/log-processors/initial-report-redeemed';
+
 const augur = new Augur();
 
 function getInitialReport(db, log) {

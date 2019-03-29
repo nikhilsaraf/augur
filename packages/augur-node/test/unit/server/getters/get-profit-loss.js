@@ -1,8 +1,8 @@
 jest.mock("src/blockchain/process-block");
-const Augur = require("augur.js");
-const setupTestDb = require("test.database");
-const { getProfitLoss, getProfitLossSummary, bucketRangeByInterval } = require("src/server/getters/get-profit-loss");
-const processBlock = require("src/blockchain/process-block");
+import Augur from 'augur.js';
+import setupTestDb from 'test.database';
+import { getProfitLoss, getProfitLossSummary, bucketRangeByInterval } from 'src/server/getters/get-profit-loss';
+import processBlock from 'src/blockchain/process-block';
 
 describe("server/getters/get-profit-loss#bucketRangeByInterval", () => {
   test("throws when startTime is negative", (done) => {
@@ -89,8 +89,8 @@ describe("server/getters/get-profit-loss#bucketRangeByInterval", () => {
 
 
 describe("server/getters/get-profit-loss#getProfitLoss", () => {
-  var connection = null;
-  var augur = new Augur();
+  let connection = null;
+  let augur = new Augur();
 
   beforeEach(async () => {
     connection = await setupTestDb();
@@ -129,8 +129,8 @@ describe("server/getters/get-profit-loss#getProfitLoss", () => {
 });
 
 describe("server/getters/get-profit-loss#getProfitLossSummary", () => {
-  var connection = null;
-  var augur = new Augur();
+  let connection = null;
+  let augur = new Augur();
 
   beforeEach(async () => {
     connection = await setupTestDb();

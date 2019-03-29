@@ -1,5 +1,5 @@
-const setupTestDb = require("test.database");
-const { processUniverseForkedLog, processUniverseForkedLogRemoval } = require("src/blockchain/log-processors/universe-forked");
+import setupTestDb from 'test.database';
+import { processUniverseForkedLog, processUniverseForkedLogRemoval } from 'src/blockchain/log-processors/universe-forked';
 
 const otherMarket = "0x0000000000000000000000000000000000000222";
 

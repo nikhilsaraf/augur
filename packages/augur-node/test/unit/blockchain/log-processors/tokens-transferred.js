@@ -1,6 +1,6 @@
-const setupTestDb = require("test.database");
-const { BigNumber } = require("bignumber.js");
-const { processTokensTransferredLog, processTokensTransferredLogRemoval } = require("src/blockchain/log-processors/tokens-transferred");
+import setupTestDb from 'test.database';
+import { BigNumber } from 'bignumber.js';
+import { processTokensTransferredLog, processTokensTransferredLogRemoval } from 'src/blockchain/log-processors/tokens-transferred';
 
 async function getState(db, log) {
   return {

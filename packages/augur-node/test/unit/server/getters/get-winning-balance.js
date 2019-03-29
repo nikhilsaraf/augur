@@ -1,6 +1,6 @@
-const { BigNumber } = require("bignumber.js");
-const setupTestDb = require("test.database");
-const { dispatchJsonRpcRequest } = require("src/server/dispatch-json-rpc-request");
+import { BigNumber } from 'bignumber.js';
+import setupTestDb from 'test.database';
+import { dispatchJsonRpcRequest } from 'src/server/dispatch-json-rpc-request';
 
 describe("server/getters/get-winning-balance", () => {
   let db;

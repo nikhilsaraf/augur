@@ -1,6 +1,6 @@
-const setupTestDb = require("test.database");
-const { BigNumber } = require("bignumber.js");
-const { processOrderCanceledLog, processOrderCanceledLogRemoval } = require("src/blockchain/log-processors/order-canceled");
+import setupTestDb from 'test.database';
+import { BigNumber } from 'bignumber.js';
+import { processOrderCanceledLog, processOrderCanceledLogRemoval } from 'src/blockchain/log-processors/order-canceled';
 
 async function getState(db, log) {
   return {

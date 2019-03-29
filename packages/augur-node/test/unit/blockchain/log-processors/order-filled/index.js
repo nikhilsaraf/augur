@@ -3,11 +3,17 @@ It appears that market.openInterest isn't correctly rolled back on processOrderF
 Check if this is a bug I introduced by adding openInterest to expect() in master.
 */
 
-const { BigNumber } = require("bignumber.js");
-const { fix } = require("speedomatic");
-const setupTestDb = require("test.database");
-const { processOrderFilledLog, processOrderFilledLogRemoval } = require("src/blockchain/log-processors/order-filled");
-const Augur = require("augur.js");
+/*
+It appears that market.openInterest isn't correctly rolled back on processOrderFilledLogRemoval(), and then category.openInterest/nonFinalizedOpenInterest is also not rolled back.
+Check if this is a bug I introduced by adding openInterest to expect() in master.
+*/
+
+import { BigNumber } from 'bignumber.js';
+
+import { fix } from 'speedomatic';
+import setupTestDb from 'test.database';
+import { processOrderFilledLog, processOrderFilledLogRemoval } from 'src/blockchain/log-processors/order-filled';
+import Augur from 'augur.js';
 
 async function getState(db, log, aux) {
   return {
