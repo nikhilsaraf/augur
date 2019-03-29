@@ -86,28 +86,28 @@ export function downloadAugurLogs(db: Knex, pouchDB: PouchDB.Database, augur: Au
 
   logger.info(`Getting Augur logs from block ${fromBlock} to block ${toBlock}`);
   let lastBlockDetails = new Promise<BlockDetailsByBlock>((resolve) => resolve([]));
-  augur.events.getAllAugurLogs({ fromBlock, toBlock, blocksPerChunk }, (batchOfAugurLogs: Array<FormattedEventLog>, blockRange: BlockRange): void => {
-      if (!batchOfAugurLogs || batchLogProcessQueue.paused) return;
-      const blockNumbers = batchOfAugurLogs.length > 0 ? extractBlockNumbers(batchOfAugurLogs) : getBlockNumbersInRange(blockRange);
-      const blockDetailPromise = lastBlockDetails.then(() => fetchAllBlockDetails(augur, blockNumbers));
-      lastBlockDetails = blockDetailPromise;
-      batchLogProcessQueue.push(async (nextBatch) => {
-        try {
-          await processBatchOfLogs(db, pouchDB, augur, batchOfAugurLogs, blockNumbers, blockDetailPromise);
-          nextBatch(null);
-        } catch (err) {
-          batchLogProcessQueue.kill();
-          batchLogProcessQueue.pause();
-          callback(err);
-        }
-      });
-    },
-    (err) => {
-      if (!batchLogProcessQueue.paused) {
-        batchLogProcessQueue.push(() => {
-          callback(err);
-          batchLogProcessQueue.kill();
-        });
-      }
-    });
+  // augur.events.getAllAugurLogs({ fromBlock, toBlock, blocksPerChunk }, (batchOfAugurLogs: Array<FormattedEventLog>, blockRange: BlockRange): void => {
+  //     if (!batchOfAugurLogs || batchLogProcessQueue.paused) return;
+  //     const blockNumbers = batchOfAugurLogs.length > 0 ? extractBlockNumbers(batchOfAugurLogs) : getBlockNumbersInRange(blockRange);
+  //     const blockDetailPromise = lastBlockDetails.then(() => fetchAllBlockDetails(augur, blockNumbers));
+  //     lastBlockDetails = blockDetailPromise;
+  //     batchLogProcessQueue.push(async (nextBatch) => {
+  //       try {
+  //         await processBatchOfLogs(db, pouchDB, augur, batchOfAugurLogs, blockNumbers, blockDetailPromise);
+  //         nextBatch(null);
+  //       } catch (err) {
+  //         batchLogProcessQueue.kill();
+  //         batchLogProcessQueue.pause();
+  //         callback(err);
+  //       }
+  //     });
+  //   },
+  //   (err: Error) => {
+  //     if (!batchLogProcessQueue.paused) {
+  //       batchLogProcessQueue.push(() => {
+  //         callback(err);
+  //         batchLogProcessQueue.kill();
+  //       });
+  //     }
+  //   });
 }

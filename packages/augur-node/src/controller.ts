@@ -18,6 +18,7 @@ import { BackupRestore } from "./sync/backup-restore";
 import { ConnectOptions } from "./setup/connectOptions";
 import { LoggerInterface } from "./utils/logger/logger";
 import { clearOverrideTimestamp } from "./blockchain/process-block";
+import { BlockAndLogStreamerListener } from "@augurproject/state/build/db/BlockAndLogStreamerListener";
 
 export interface SyncedBlockInfo {
   lastSyncBlockNumber: number;
@@ -37,7 +38,7 @@ export class AugurNodeController {
   private serverResult: RunServerResult | undefined;
   private errorCallback: ErrorCallback | undefined;
   private logger = logger;
-  private blockAndLogsQueue: BlockAndLogsQueue | undefined;
+  private blockAndLogsQueue: BlockAndLogStreamerListener | undefined;
 
   constructor(augur: Augur, networkConfig: ConnectOptions, databaseDir: string = ".", isWarpSync: boolean = false) {
     this.augur = augur;
@@ -54,16 +55,17 @@ export class AugurNodeController {
     try {
       ({knex: this.db, pouch: this.pouch } = await createDbAndConnect(errorCallback, this.augur, this.networkConfig, this.databaseDir));
       this.controlEmitter.emit(ControlMessageType.BulkSyncStarted);
+
       this.serverResult = runServer(this.db, this.augur, this.controlEmitter);
-      const handoffBlockNumber = await bulkSyncAugurNodeWithBlockchain(this.db, this.pouch, this.augur, this.networkConfig.blocksPerChunk);
-      this.controlEmitter.emit(ControlMessageType.BulkSyncFinished);
+      // const handoffBlockNumber = await bulkSyncAugurNodeWithBlockchain(this.db, this.pouch, this.augur, this.networkConfig.blocksPerChunk);
+      // this.controlEmitter.emit(ControlMessageType.BulkSyncFinished);
       this.logger.info("Bulk sync with blockchain complete.");
       // We received a shutdown so just return.
       if (!this.isRunning()) return;
       this.logger.info("Bulk orphaned orders check with blockchain complete.");
       // We received a shutdown so just return.
       if (!this.isRunning()) return;
-      this.blockAndLogsQueue = startAugurListeners(this.db, this.pouch, this.augur, handoffBlockNumber + 1, this.databaseDir, this.isWarpSync, this._shutdownCallback.bind(this));
+      this.blockAndLogsQueue = startAugurListeners(this.db, this.pouch, this.augur, UploadBlockNumbers[this.augur.networkId], this.databaseDir, this.isWarpSync, this._shutdownCallback.bind(this));
     } catch (err) {
       if (this.errorCallback) this.errorCallback(err);
     }
@@ -155,7 +157,6 @@ export class AugurNodeController {
     this.running = false;
     this.logger.info("Stopping Augur Node Server");
     if (this.blockAndLogsQueue !== undefined) {
-      this.blockAndLogsQueue.stop();
       this.blockAndLogsQueue = undefined;
     }
     if (this.serverResult !== undefined) {
