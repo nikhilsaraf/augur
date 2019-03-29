@@ -61,7 +61,7 @@ export async function processMarketCreatedLog(augur: Augur, log: FormattedEventL
     numTicks: (await market.getNumTicks_()).toString(),
     marketCreatorSettlementFeeDivisor: (await market.getMarketCreatorSettlementFeeDivisor_()).toString(),
     reportingFeeDivisor: (await augur.contracts.universe.getOrCacheReportingFeeDivisor_()).toString(),
-    validityBondAttoeth: (await market.getValidityBondAttoEth_()).toString(),
+    validityBondAttoeth: (await market.getValidityBondAttoCash_()).toString(),
     getOutcomes: await getOutcomes(augur, log),
   };
 
