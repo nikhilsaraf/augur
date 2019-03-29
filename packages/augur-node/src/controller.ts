@@ -66,6 +66,8 @@ export class AugurNodeController {
       // We received a shutdown so just return.
       if (!this.isRunning()) return;
       this.blockAndLogsQueue = startAugurListeners(this.db, this.pouch, this.augur, UploadBlockNumbers[this.augur.networkId], this.databaseDir, this.isWarpSync, this._shutdownCallback.bind(this));
+
+      this.blockAndLogsQueue.startBlockStreamListener();
     } catch (err) {
       if (this.errorCallback) this.errorCallback(err);
     }
