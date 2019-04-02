@@ -5,11 +5,14 @@
     "rootDirs": [
       "src",
       "test"
-    ]
+    ],
+    "noImplicitAny": false
   },
   "include": [
-    "src",
-    "test"
+    "src"
+  ],
+  "exclude": [
+    "**/*.test.ts"
   ],
   "references": [
     {

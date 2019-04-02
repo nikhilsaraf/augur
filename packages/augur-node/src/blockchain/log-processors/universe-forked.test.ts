@@ -1,4 +1,4 @@
-import setupTestDb from 'test/unit/test.database';
+import { setupTestDb } from 'test/unit/test.database';
 import { processUniverseForkedLog, processUniverseForkedLogRemoval } from './universe-forked';
 
 const otherMarket = "0x0000000000000000000000000000000000000222";

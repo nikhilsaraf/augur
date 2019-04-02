@@ -1,4 +1,4 @@
-import setupTestDb from 'test/unit/test.database';
+import { setupTestDb } from 'test/unit/test.database';
 import { processApprovalLog, processApprovalLogRemoval } from './approval';
 
 function getState(db, log) {

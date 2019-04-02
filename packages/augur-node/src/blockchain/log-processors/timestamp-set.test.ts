@@ -1,4 +1,4 @@
-import setupTestDb from 'test/unit/test.database';
+import { setupTestDb } from 'test/unit/test.database';
 import { processTimestampSetLog, processTimestampSetLogRemoval } from './timestamp-set';
 import { getOverrideTimestamp } from 'src/blockchain/process-block';
 

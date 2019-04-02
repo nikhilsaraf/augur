@@ -11,8 +11,8 @@ Check if this is a bug I introduced by adding openInterest to expect() in master
 import { BigNumber } from 'bignumber.js';
 
 import { fix } from 'speedomatic';
-import setupTestDb from 'test/unit/test.database';
-import { processOrderFilledLog, processOrderFilledLogRemoval } from 'src/blockchain/log-processors/order-filled';
+import { setupTestDb } from 'test/unit/test.database';
+import { processOrderFilledLog, processOrderFilledLogRemoval } from '../order-filled';
 import Augur from 'augur.js';
 
 async function getState(db, log, aux) {

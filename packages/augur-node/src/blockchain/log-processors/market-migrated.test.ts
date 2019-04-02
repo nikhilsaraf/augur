@@ -1,4 +1,4 @@
-import setupTestDb from 'test/unit/test.database';
+import { setupTestDb } from 'test/unit/test.database';
 import { processMarketMigratedLog, processMarketMigratedLogRemoval } from './market-migrated';
 import { getMarketsWithReportingState } from 'src/server/getters/database';
 import { ReportingState } from 'src/types';

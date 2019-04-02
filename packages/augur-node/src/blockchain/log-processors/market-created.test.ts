@@ -1,6 +1,6 @@
 import Augur from 'augur.js';
 import { BigNumber } from 'bignumber.js';
-import setupTestDb from 'test/unit/test.database';
+import { setupTestDb } from 'test/unit/test.database';
 import { processMarketCreatedLog, processMarketCreatedLogRemoval } from './market-created';
 import { getMarketsWithReportingState } from 'src/server/getters/database';
 

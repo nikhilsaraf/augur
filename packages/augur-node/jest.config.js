@@ -122,13 +122,13 @@ module.exports = {
   // testLocationInResults: false,
 
   // The glob patterns Jest uses to detect test files
-  testMatch: ["<rootDir>/test/(unit|integration)/**/*.(j|t)s"],
+  // testMatch: ["<rootDir>/src/(unit|integration)/**/*.(j|t)s"],
 
   // An array of regexp pattern strings that are matched against all test paths, matched tests are skipped
   testPathIgnorePatterns: ["/node_modules/", "<rootDir>/test/unit/test.database.js", "<rootDir>/test/setup.js"],
 
   // The regexp pattern Jest uses to detect test files
-  // testRegex: "",
+  testRegex: "\\.test\\.tsx?$",
 
   // This option allows the use of a custom results processor
   // testResultsProcessor: null,

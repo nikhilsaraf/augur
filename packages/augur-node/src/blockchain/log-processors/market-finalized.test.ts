@@ -1,8 +1,8 @@
 import Augur from 'augur.js';
-import setupTestDb from 'test/unit/test.database';
+import { setupTestDb } from 'test/unit/test.database';
 import { BigNumber } from 'bignumber.js';
 import { processMarketFinalizedLog, processMarketFinalizedLogRemoval } from './market-finalized';
-import { getMarketsWithReportingState } from 'src/server/getters/database';
+import { getMarketsWithReportingState } from '../../server/getters/database';
 
 async function getMarketState(db, log) {
   return {

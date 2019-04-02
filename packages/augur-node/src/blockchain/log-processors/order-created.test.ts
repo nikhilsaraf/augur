@@ -1,8 +1,8 @@
 import { fix } from 'speedomatic';
-import setupTestDb from 'test/unit/test.database';
+import { setupTestDb } from 'test/unit/test.database';
 import { BigNumber } from 'bignumber.js';
 import { processOrderCreatedLog, processOrderCreatedLogRemoval } from './order-created';
-import Augur from 'augur.js';
+import { convertDisplayAmountToOnChainAmount } from "../../utils/convert-display-amount-to-on-chain-amount";
 
 function getState(db, log) {
   return db("orders").where("orderId", log.orderId);
@@ -12,9 +12,7 @@ function getPendingOrphansState(db, marketId) {
   return db("pending_orphan_checks").where("marketId", marketId);
 }
 
-const augur = {
-  utils: new Augur().utils,
-};
+const augur = {};
 
 describe("blockchain/log-processors/order-created", () => {
   let db;
@@ -26,7 +24,7 @@ describe("blockchain/log-processors/order-created", () => {
     orderType: "0",
     shareToken: "0x0100000000000000000000000000000000000000",
     price: "7500",
-    amount: augur.utils.convertDisplayAmountToOnChainAmount("3", new BigNumber(1), new BigNumber(10000)).toString(),
+    amount: convertDisplayAmountToOnChainAmount("3", new BigNumber(1), new BigNumber(10000)).toString(),
     sharesEscrowed: "0",
     moneyEscrowed: fix("2.25", "string"),
     creator: "CREATOR_ADDRESS",

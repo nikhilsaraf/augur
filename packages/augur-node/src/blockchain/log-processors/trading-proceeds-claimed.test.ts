@@ -1,5 +1,5 @@
 import { BigNumber } from 'bignumber.js';
-import setupTestDb from 'test/unit/test.database';
+import { setupTestDb } from 'test/unit/test.database';
 import { processTradingProceedsClaimedLog, processTradingProceedsClaimedLogRemoval } from './trading-proceeds-claimed';
 
 function getTradingProceeds(db) {

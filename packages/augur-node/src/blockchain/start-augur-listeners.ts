@@ -1,16 +1,31 @@
 import * as _ from "lodash";
-import Knex from "knex";
-import { Augur, ErrorCallback } from "../types";
+import { Augur } from "../types";
 import { logProcessors } from "./log-processors";
 
-import { EthersProviderBlockStreamAdapter } from "blockstream-adapters";
+import { EthersProviderBlockStreamAdapter, ExtendedLog } from "blockstream-adapters";
+import { Block, BlockAndLogStreamer} from "ethereumjs-blockstream";
 import { BlockAndLogStreamerListener } from "@augurproject/state/build/db/BlockAndLogStreamerListener";
 import { EventLogDBRouter } from "@augurproject/state/build/db/EventLogDBRouter";
-import { Addresses } from "@augurproject/artifacts";
+import { Addresses, UploadBlockNumbers } from "@augurproject/artifacts";
 
-export function startAugurListeners(db: Knex, pouch: PouchDB.Database, augur: Augur, highestBlockNumber: number, databaseDir: string, isWarpSync: boolean, errorCallback: ErrorCallback): BlockAndLogStreamerListener {
+export async function startAugurListeners(augur: Augur): Promise<BlockAndLogStreamerListener> {
   const eventLogDBRouter = new EventLogDBRouter(augur.events.parseLogs);
-  const blockAndLogStreamerListener =  BlockAndLogStreamerListener.create(augur.provider, eventLogDBRouter, Addresses[augur.networkId].Augur, augur.events.getEventTopics);
+
+  const dependencies = new EthersProviderBlockStreamAdapter(augur.provider);
+  const blockAndLogStreamer = new BlockAndLogStreamer<Block, ExtendedLog>(dependencies.getBlockByHash, dependencies.getLogs, (error: Error) => {
+    console.error(error);
+  });
+  const uploadBlockNumber = UploadBlockNumbers[augur.networkId];
+  blockAndLogStreamer.subscribeToOnBlockAdded((block)=> console.log("new block", block));
+
+  const blockAndLogStreamerListener = new BlockAndLogStreamerListener({
+    address: Addresses[augur.networkId].Augur,
+    blockAndLogStreamer,
+    eventLogDBRouter,
+    getEventTopics: augur.events.getEventTopics,
+    getBlockByHash: dependencies.getBlockByHash,
+    listenForNewBlocks: dependencies.startPollingForBlocks
+  });
 
   _.forEach(logProcessors.Augur, (value, event) => {
     const onAdd = _.partial(value.add, augur);
@@ -24,5 +39,9 @@ export function startAugurListeners(db: Knex, pouch: PouchDB.Database, augur: Au
         logs.forEach(onRemove);
       });
   });
+  //
+  // const block = await dependencies.getBlockByNumber(uploadBlockNumber);
+  // await blockAndLogStreamerListener.onNewBlock(block);
+
   return blockAndLogStreamerListener;
 }

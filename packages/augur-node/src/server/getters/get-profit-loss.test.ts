@@ -1,6 +1,6 @@
 jest.mock("src/blockchain/process-block");
 import Augur from 'augur.js';
-import setupTestDb from 'test/unit/test.database';
+import { setupTestDb } from 'test/unit/test.database';
 import { getProfitLoss, getProfitLossSummary, bucketRangeByInterval } from 'src/server/getters/get-profit-loss';
 import processBlock from 'src/blockchain/process-block';
 

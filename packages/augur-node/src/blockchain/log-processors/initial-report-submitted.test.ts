@@ -1,6 +1,6 @@
 import Augur from 'augur.js';
 import { BigNumber } from 'bignumber.js';
-import setupTestDb from 'test/unit/test.database';
+import { setupTestDb } from 'test/unit/test.database';
 import { processInitialReportSubmittedLog, processInitialReportSubmittedLogRemoval } from './initial-report-submitted';
 import { setOverrideTimestamp, removeOverrideTimestamp } from '../process-block';
 

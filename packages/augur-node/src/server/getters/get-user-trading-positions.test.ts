@@ -1,6 +1,6 @@
 jest.mock("src/blockchain/process-block");
 import Augur from 'augur.js';
-import setupTestDb from 'test/unit/test.database';
+import { setupTestDb } from 'test/unit/test.database';
 import { dispatchJsonRpcRequest } from '../dispatch-json-rpc-request';
 import processBlock from 'src/blockchain/process-block';
 const augur = new Augur();

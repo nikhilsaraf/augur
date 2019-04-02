@@ -1,5 +1,5 @@
 import { BigNumber } from 'bignumber.js';
-import setupTestDb from 'test/unit/test.database';
+import { setupTestDb } from 'test/unit/test.database';
 import { dispatchJsonRpcRequest } from '../dispatch-json-rpc-request';
 
 describe("server/getters/get-winning-balance", () => {

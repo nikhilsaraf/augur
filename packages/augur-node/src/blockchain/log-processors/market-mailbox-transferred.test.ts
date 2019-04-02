@@ -1,4 +1,4 @@
-import setupTestDb from 'test/unit/test.database';
+import { setupTestDb } from 'test/unit/test.database';
 
 import {
   processMarketMailboxTransferredLog,
@@ -6,7 +6,7 @@ import {
 } from './market-mailbox-transferred';
 import Knex from "knex";
 
-function getMarket(db:Knex, log) {
+function getMarket(db:Knex, log:Log) {
   return db.select(["markets.marketId", "markets.marketCreatorMailboxOwner"]).from("markets").where({ "markets.marketId": log.market });
 }
 describe("blockchain/log-processors/market-mailbox-transferred", () => {

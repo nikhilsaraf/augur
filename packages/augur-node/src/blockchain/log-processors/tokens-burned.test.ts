@@ -1,5 +1,6 @@
-import setupTestDb from 'test/unit/test.database';
-import { BigNumber } from 'bignumber.js';
+import { setupTestDb } from 'test/unit/test.database';
+import { BigNumber } from "../../types";
+
 import { processBurnLog, processBurnLogRemoval } from './token/burn';
 
 function getTokenBalances(db, log) {
@@ -34,7 +35,7 @@ describe("blockchain/log-processors/tokens-burned", () => {
     blockNumber: 1400101,
     target: "FROM_ADDRESS",
     token: "TOKEN_ADDRESS",
-    amount: new BigNumber("9000", 10),
+    amount: new BigNumber("9000"),
   };
   test("Tokens burned", async () => {
     return db.transaction(async (trx) => {
@@ -43,16 +44,16 @@ describe("blockchain/log-processors/tokens-burned", () => {
       await expect(getTokenBalances(trx, log)).resolves.toEqual([{
         owner: "FROM_ADDRESS",
         token: "TOKEN_ADDRESS",
-        balance: new BigNumber("1", 10),
-        supply: new BigNumber("1", 10),
+        balance: new BigNumber("1"),
+        supply: new BigNumber("1"),
       }]);
       await(await processBurnLogRemoval(augur, log))(trx);
 
       await expect(getTokenBalances(trx, log)).resolves.toEqual([{
         owner: "FROM_ADDRESS",
         token: "TOKEN_ADDRESS",
-        balance: new BigNumber("9001", 10),
-        supply: new BigNumber("9001", 10),
+        balance: new BigNumber("9001"),
+        supply: new BigNumber("9001"),
       }]);
     });
   });

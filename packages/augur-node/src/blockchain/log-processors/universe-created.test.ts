@@ -1,4 +1,4 @@
-import setupTestDb from 'test/unit/test.database';
+import { setupTestDb } from 'test/unit/test.database';
 import { processUniverseCreatedLog, processUniverseCreatedLogRemoval } from './universe-created';
 
 function getUniverse(db, log) {

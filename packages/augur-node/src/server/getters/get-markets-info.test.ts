@@ -1,4 +1,4 @@
-import setupTestDb from 'test/unit/test.database';
+import { setupTestDb } from 'test/unit/test.database';
 import { dispatchJsonRpcRequest } from '../dispatch-json-rpc-request';
 
 describe("server/getters/get-markets-info", () => {
@@ -43,8 +43,6 @@ describe("server/getters/get-markets-info", () => {
           reportingFeeRate: "0.02",
           marketCreatorFeeRate: "0.02",
           marketCreatorFeesBalance: "0",
-          marketCreatorMailbox: "0xbbb0000000000000000000000000000000000001",
-          marketCreatorMailboxOwner: "0x0000000000000000000000000000000000000b0b",
           initialReportSize: null,
           category: "TEST CATEGORY",
           tags: ["test tag 1", "test tag 2"],
@@ -127,8 +125,6 @@ describe("server/getters/get-markets-info", () => {
           reportingFeeRate: "0.02",
           marketCreatorFeeRate: "0.01",
           marketCreatorFeesBalance: "0",
-          marketCreatorMailbox: "0xbbb0000000000000000000000000000000000002",
-          marketCreatorMailboxOwner: "0x0000000000000000000000000000000000000b0b",
           initialReportSize: null,
           category: "TEST CATEGORY",
           tags: ["test tag 1", "test tag 2"],
@@ -194,8 +190,6 @@ describe("server/getters/get-markets-info", () => {
           reportingFeeRate: "0.02",
           marketCreatorFeeRate: "0.02",
           marketCreatorFeesBalance: "0",
-          marketCreatorMailbox: "0xbbb0000000000000000000000000000000000001",
-          marketCreatorMailboxOwner: "0x0000000000000000000000000000000000000b0b",
           initialReportSize: null,
           category: "TEST CATEGORY",
           tags: ["test tag 1", "test tag 2"],
@@ -279,8 +273,6 @@ describe("server/getters/get-markets-info", () => {
           reportingFeeRate: "0.02",
           marketCreatorFeeRate: "0.01",
           marketCreatorFeesBalance: "0",
-          marketCreatorMailbox: "0xbbb0000000000000000000000000000000000002",
-          marketCreatorMailboxOwner: "0x0000000000000000000000000000000000000b0b",
           initialReportSize: null,
           category: "TEST CATEGORY",
           tags: ["test tag 1", "test tag 2"],
@@ -345,8 +337,6 @@ describe("server/getters/get-markets-info", () => {
           reportingFeeRate: "0.02",
           marketCreatorFeeRate: "0.01",
           marketCreatorFeesBalance: "0",
-          marketCreatorMailbox: "0xbbb0000000000000000000000000000000000002",
-          marketCreatorMailboxOwner: "0x0000000000000000000000000000000000000b0b",
           initialReportSize: null,
           category: "TEST CATEGORY",
           tags: ["test tag 1", "test tag 2"],
@@ -399,8 +389,6 @@ describe("server/getters/get-markets-info", () => {
           reportingFeeRate: "0.02",
           marketCreatorFeeRate: "0.02",
           marketCreatorFeesBalance: "0",
-          marketCreatorMailbox: "0xbbb0000000000000000000000000000000000001",
-          marketCreatorMailboxOwner: "0x0000000000000000000000000000000000000b0b",
           initialReportSize: null,
           category: "TEST CATEGORY",
           tags: ["test tag 1", "test tag 2"],
@@ -494,8 +482,6 @@ describe("server/getters/get-markets-info", () => {
           reportingFeeRate: "0.02",
           marketCreatorFeeRate: "0.01",
           marketCreatorFeesBalance: "0",
-          marketCreatorMailbox: "0xbbb0000000000000000000000000000000000019",
-          marketCreatorMailboxOwner: "0x0000000000000000000000000000000000000b0b",
           initialReportSize: null,
           category: "TEST CATEGORY",
           tags: [
@@ -607,8 +593,6 @@ describe("server/getters/get-markets-info", () => {
           reportingFeeRate: "0.02",
           marketCreatorFeeRate: "0.02",
           marketCreatorFeesBalance: "0",
-          marketCreatorMailbox: "0xbbb0000000000000000000000000000000000001",
-          marketCreatorMailboxOwner: "0x0000000000000000000000000000000000000b0b",
           initialReportSize: null,
           category: "TEST CATEGORY",
           tags: ["test tag 1", "test tag 2"],

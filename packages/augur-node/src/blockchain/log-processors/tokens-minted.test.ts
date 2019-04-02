@@ -1,4 +1,4 @@
-import setupTestDb from 'test/unit/test.database';
+import { setupTestDb } from 'test/unit/test.database';
 import { BigNumber } from 'bignumber.js';
 import { processMintLog, processMintLogRemoval } from './token/mint';
 
