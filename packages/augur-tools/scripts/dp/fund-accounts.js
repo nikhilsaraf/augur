@@ -1,13 +1,14 @@
 #!/usr/bin/env node
 
-"use strict";
+#!/usr/bin/env node
 
-var chalk = require("chalk");
-var Augur = require("augur.js");
-var fundAccounts = require("./lib/fund-accounts");
-var getPrivateKey = require("./lib/get-private-key").getPrivateKey;
-var connectionEndpoints = require("../connection-endpoints");
-var debugOptions = require("../debug-options");
+import chalk from 'chalk';
+
+import Augur from 'augur.js';
+import fundAccounts from './lib/fund-accounts';
+import { getPrivateKey } from './lib/get-private-key';
+import connectionEndpoints from '../connection-endpoints';
+import debugOptions from '../debug-options';
 
 var etherFundingPerAccount = process.env.ETHER_FUNDING_PER_ACCOUNT || "10000";
 
@@ -24,7 +25,7 @@ var augur = new Augur();
 
 augur.rpc.setDebugOptions(debugOptions);
 
-module.exports = fundAccounts;
+export default fundAccounts;
 
 if (require.main === module) {
   getPrivateKey(keystoreFilePath, function (err, auth) {

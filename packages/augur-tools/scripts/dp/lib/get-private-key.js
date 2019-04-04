@@ -1,15 +1,13 @@
-"use strict";
-
-var fs = require("fs");
-var chalk = require("chalk");
-var keythereum = require("keythereum");
-var speedomatic = require("speedomatic");
-var readlineSync = require("readline-sync");
-var debugOptions = require("../../debug-options");
+import fs from 'fs';
+import chalk from 'chalk';
+import keythereum from 'keythereum';
+import speedomatic from 'speedomatic';
+import readlineSync from 'readline-sync';
+import debugOptions from '../../debug-options';
 
 function getPrivateKeyFromString(privateKey) {
   privateKey = Buffer.from(speedomatic.strip0xPrefix(privateKey), "hex");
-  var address = keythereum.privateKeyToAddress(privateKey);
+  let address = keythereum.privateKeyToAddress(privateKey);
   if (debugOptions.cannedMarkets) console.log(chalk.green.dim("sender:"), chalk.green(address));
   return { accountType: "privateKey", signer: privateKey, address: address };
 }
@@ -21,8 +19,8 @@ function getPrivateKeyFromEnv() {
 function getPrivateKeyFromKeystoreFile(keystoreFilePath, callback) {
   fs.readFile(keystoreFilePath, function (err, keystoreJson) {
     if (err) callback(err);
-    var keystore = JSON.parse(keystoreJson);
-    var address = speedomatic.formatEthereumAddress(keystore.address);
+    let keystore = JSON.parse(keystoreJson);
+    let address = speedomatic.formatEthereumAddress(keystore.address);
     if (debugOptions.cannedMarkets) console.log(chalk.green.dim("sender:"), chalk.green(address));
     keythereum.recover(process.env.ETHEREUM_PASSWORD || readlineSync.question("Password: ", { hideEchoBack: true }), keystore, function (privateKey) {
       if (privateKey == null || privateKey.error) {
@@ -45,6 +43,4 @@ function getPrivateKey(keystoreFilePath, callback) {
   }
 }
 
-module.exports.getPrivateKey = getPrivateKey;
-module.exports.getPrivateKeyFromEnv = getPrivateKeyFromEnv;
-module.exports.getPrivateKeyFromString = getPrivateKeyFromString;
+export { getPrivateKey, getPrivateKeyFromEnv, getPrivateKeyFromString };

@@ -1,8 +1,6 @@
-"use strict";
-
-var chalk = require("chalk");
-var debugOptions = require("../../debug-options");
-var augur = require("augur.js");
+import chalk from 'chalk';
+import debugOptions from '../../debug-options';
+import augur from 'augur.js';
 
 function printTransactionStatus(ethrpc, transactionHash, callback) {
   callback = typeof callback === "function" ? callback : () => {};
@@ -27,4 +25,4 @@ function printTransactionStatus(ethrpc, transactionHash, callback) {
   });
 }
 
-module.exports = printTransactionStatus;
+export default printTransactionStatus;

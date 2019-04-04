@@ -1,21 +1,22 @@
 #!/usr/bin/env node
 
-var ethers = require("ethers");
-var path = require("path");
-var assign = require("lodash").assign;
-var Augur = require("augur.js");
-var debugOptions = require("../debug-options");
-var connectionEndpoints = require("../connection-endpoints");
-var core = require("@augurproject/core");
-var getPrivateKeyFromString = require("./lib/get-private-key")
-  .getPrivateKeyFromString;
-var parrotSay = require("parrotsay-api");
-var chalk = require("chalk");
-var columnify = require("columnify");
+#!/usr/bin/env node
 
-var repFaucet = require("../rep-faucet");
-var createMarkets = require("./create-markets");
-var createOrders = require("./create-orders");
+import ethers from 'ethers';
+
+import path from 'path';
+import { assign } from 'lodash';
+import Augur from 'augur.js';
+import debugOptions from '../debug-options';
+import connectionEndpoints from '../connection-endpoints';
+import core from '@augurproject/core';
+import { getPrivateKeyFromString } from './lib/get-private-key';
+import parrotSay from 'parrotsay-api';
+import chalk from 'chalk';
+import columnify from 'columnify';
+import repFaucet from '../rep-faucet';
+import createMarkets from './create-markets';
+import createOrders from './create-orders';
 
 var COMMANDS = [
   "create-markets",

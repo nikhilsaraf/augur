@@ -1,7 +1,5 @@
-"use strict";
-
-var async = require("async");
-var debugOptions = require("../../debug-options");
+import async from 'async';
+import debugOptions from '../../debug-options';
 
 function fundAccounts(
   augur,
@@ -37,4 +35,4 @@ function fundAccounts(
   );
 }
 
-module.exports = fundAccounts;
+export default fundAccounts;

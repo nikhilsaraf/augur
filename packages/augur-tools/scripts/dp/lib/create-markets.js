@@ -1,19 +1,17 @@
-"use strict";
-
-var async = require("async");
-var BigNumber = require("bignumber.js");
-var chalk = require("chalk");
-var speedomatic = require("speedomatic");
-var approveAugurEternalApprovalValue = require("./approve-augur-eternal-approval-value");
-var createMarket = require("./create-market");
-var createOrderBook = require("./create-order-book");
-var getBalances = require("./get-balances");
-var cannedMarketsData = require("../data/canned-markets");
-var debugOptions = require("../../debug-options");
+import async from 'async';
+import BigNumber from 'bignumber.js';
+import chalk from 'chalk';
+import speedomatic from 'speedomatic';
+import approveAugurEternalApprovalValue from './approve-augur-eternal-approval-value';
+import createMarket from './create-market';
+import createOrderBook from './create-order-book';
+import getBalances from './get-balances';
+import cannedMarketsData from '../data/canned-markets';
+import debugOptions from '../../debug-options';
 
 function createMarkets(augur, auth, callback) {
-  var networkId = augur.rpc.getNetworkID();
-  var universe = augur.contracts.addresses[networkId].Universe;
+  let networkId = augur.rpc.getNetworkID();
+  let universe = augur.contracts.addresses[networkId].Universe;
   if (debugOptions.cannedMarkets) {
     console.log(chalk.cyan("Network"), chalk.green(networkId));
     console.log(chalk.cyan("Account"), chalk.green(auth.address));
@@ -25,7 +23,7 @@ function createMarkets(augur, auth, callback) {
       console.log("Ether:      " + chalk.green(balances.ether));
       console.log("Reputation: " + chalk.green(balances.reputation));
     }
-    var cash = augur.contracts.addresses[networkId].Cash;
+    let cash = augur.contracts.addresses[networkId].Cash;
     augur.api.Cash.depositEther({
       meta: auth, tx: {
         to: cash,
@@ -45,8 +43,8 @@ function createMarkets(augur, auth, callback) {
             if (err) return nextMarket(err);
             console.log(chalk.green(marketId), chalk.cyan.dim(market._description));
             if (process.env.NO_CREATE_ORDERS) return nextMarket();
-            var numOutcomes = Array.isArray(market._outcomes) ? market._outcomes.length : 2;
-            var numTicks;
+            let numOutcomes = Array.isArray(market._outcomes) ? market._outcomes.length : 2;
+            let numTicks;
             if (market.marketType === "scalar") {
               numTicks = new BigNumber(market._maxPrice, 10).minus(new BigNumber(market._minPrice, 10)).dividedBy(new BigNumber(market.tickSize, 10)).toNumber();
             } else {
@@ -60,4 +58,4 @@ function createMarkets(augur, auth, callback) {
   });
 }
 
-module.exports = createMarkets;
+export default createMarkets;

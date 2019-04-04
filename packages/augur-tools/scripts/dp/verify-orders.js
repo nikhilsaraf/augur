@@ -1,15 +1,16 @@
 #!/usr/bin/env node
 
-"use strict";
+#!/usr/bin/env node
 
-var async = require("async");
-var BigNumber = require("bignumber.js");
-var chalk = require("chalk");
-var Augur = require("augur.js");
-var verifyOrderBook = require("./lib/verify-order-book");
-var selectCannedMarket = require("./lib/select-canned-market");
-var connectionEndpoints = require("../connection-endpoints");
-var debugOptions = require("../debug-options");
+import async from 'async';
+
+import BigNumber from 'bignumber.js';
+import chalk from 'chalk';
+import Augur from 'augur.js';
+import verifyOrderBook from './lib/verify-order-book';
+import selectCannedMarket from './lib/select-canned-market';
+import connectionEndpoints from '../connection-endpoints';
+import debugOptions from '../debug-options';
 
 var augur = new Augur();
 
@@ -26,11 +27,7 @@ augur.connect(connectionEndpoints, function (err) {
       var cannedMarkets = [];
       marketsInfo.forEach(function (marketInfo) {
         var description = marketInfo.description;
-        var matchingMarketsInfo = marketsInfo.filter(function (market) {
-          return market.description === description;
-        }).sort(function (marketA, marketB) {
-          return new BigNumber(marketB.creationBlock, 10).minus(new BigNumber(marketA.creationBlock, 10)).toNumber();
-        });
+        var matchingMarketsInfo = marketsInfo.filter(market => market.description === description).sort((marketA, marketB) => new BigNumber(marketB.creationBlock, 10).minus(new BigNumber(marketA.creationBlock, 10)).toNumber());
         var firstMatchingMarketId = matchingMarketsInfo[0].id;
         var cannedMarket = selectCannedMarket(marketInfo.description, marketInfo.marketType);
         if (!cannedMarket || !cannedMarket.orderBook) {

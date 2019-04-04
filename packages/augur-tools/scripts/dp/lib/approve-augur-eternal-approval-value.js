@@ -1,9 +1,7 @@
-"use strict";
-
-var BigNumber = require("bignumber.js");
+import BigNumber from 'bignumber.js';
 
 function approveAugurEternalApprovalValue(augur, address, auth, callback) {
-  var augurContract = augur.contracts.addresses[augur.rpc.getNetworkID()].Augur;
+  let augurContract = augur.contracts.addresses[augur.rpc.getNetworkID()].Augur;
   augur.api.Cash.allowance({ _owner: address, _spender: augurContract }, function (err, allowance) {
     if (err) return callback(err);
     if (new BigNumber(allowance, 10).eq(new BigNumber(augur.constants.ETERNAL_APPROVAL_VALUE, 16))) {
@@ -27,4 +25,4 @@ function approveAugurEternalApprovalValue(augur, address, auth, callback) {
   });
 }
 
-module.exports = approveAugurEternalApprovalValue;
+export default approveAugurEternalApprovalValue;

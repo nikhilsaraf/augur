@@ -1,6 +1,4 @@
-"use strict";
-
-var speedomatic = require("speedomatic");
+import speedomatic from 'speedomatic';
 
 function getBalances(augur, universe, address, callback) {
   augur.api.Universe.getReputationToken({ tx: { to: universe } }, function (err, reputationTokenAddress) {
@@ -19,4 +17,4 @@ function getBalances(augur, universe, address, callback) {
   });
 }
 
-module.exports = getBalances;
+export default getBalances;

@@ -1,14 +1,15 @@
 #!/usr/bin/env node
 
-"use strict";
+#!/usr/bin/env node
 
-var chalk = require("chalk");
-var Augur = require("augur.js");
-var approveAugurEternalApprovalValue = require("./lib/approve-augur-eternal-approval-value");
-var fillBothOrderTypes = require("./lib/fill-both-order-types");
-var getPrivateKey = require("./lib/get-private-key").getPrivateKey;
-var connectionEndpoints = require("../connection-endpoints");
-var debugOptions = require("../debug-options");
+import chalk from 'chalk';
+
+import Augur from 'augur.js';
+import approveAugurEternalApprovalValue from './lib/approve-augur-eternal-approval-value';
+import fillBothOrderTypes from './lib/fill-both-order-types';
+import { getPrivateKey } from './lib/get-private-key';
+import connectionEndpoints from '../connection-endpoints';
+import debugOptions from '../debug-options';
 
 var keystoreFilePath = process.argv[2];
 

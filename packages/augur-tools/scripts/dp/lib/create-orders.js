@@ -1,10 +1,8 @@
-"use strict";
-
-var async = require("async");
-var chalk = require("chalk");
-var createOrderBook = require("./create-order-book");
-var selectCannedMarket = require("./select-canned-market");
-var debugOptions = require("../../debug-options");
+import async from 'async';
+import chalk from 'chalk';
+import createOrderBook from './create-order-book';
+import selectCannedMarket from './select-canned-market';
+import debugOptions from '../../debug-options';
 
 function createOrders(augur, marketIds, auth, callback) {
   augur.markets.getMarketsInfo({ marketIds: marketIds }, function (err, marketsInfo) {
@@ -15,7 +13,7 @@ function createOrders(augur, marketIds, auth, callback) {
         console.warn(chalk.yellow.bold("marketInfo not found:"), marketInfo);
         return nextMarket();
       }
-      var cannedMarket = selectCannedMarket(marketInfo.description, marketInfo.marketType);
+      let cannedMarket = selectCannedMarket(marketInfo.description, marketInfo.marketType);
       if (!cannedMarket || !cannedMarket.orderBook) {
         console.warn(chalk.yellow.bold("Canned market data not found for market"), chalk.green(marketInfo.id), chalk.cyan.dim(marketInfo.description));
         return nextMarket();
@@ -25,4 +23,4 @@ function createOrders(augur, marketIds, auth, callback) {
   });
 }
 
-module.exports = createOrders;
+export default createOrders;

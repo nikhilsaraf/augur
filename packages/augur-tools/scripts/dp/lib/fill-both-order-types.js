@@ -1,7 +1,5 @@
-"use strict";
-
-var async = require("async");
-var fillOrder = require("./fill-order");
+import async from 'async';
+import fillOrder from './fill-order';
 
 function fillBothOrderTypes(augur, universe, fillerAddress, outcomeToTrade, sharesToTrade, auth, callback) {
   async.series([
@@ -10,4 +8,4 @@ function fillBothOrderTypes(augur, universe, fillerAddress, outcomeToTrade, shar
   ], callback);
 }
 
-module.exports = fillBothOrderTypes;
+export default fillBothOrderTypes;

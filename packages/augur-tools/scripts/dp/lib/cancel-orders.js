@@ -1,9 +1,7 @@
-"use strict";
-
-var async = require("async");
-var chalk = require("chalk");
-var cancelOrder = require("./cancel-order");
-var debugOptions = require("../../debug-options");
+import async from 'async';
+import chalk from 'chalk';
+import cancelOrder from './cancel-order';
+import debugOptions from '../../debug-options';
 
 function cancelOrders(augur, creator, universe, auth, callback) {
   console.log(chalk.cyan("Canceling orders for"), chalk.green(creator), chalk.cyan("in universe"), chalk.green(universe));
@@ -22,4 +20,4 @@ function cancelOrders(augur, creator, universe, auth, callback) {
   });
 }
 
-module.exports = cancelOrders;
+export default cancelOrders;

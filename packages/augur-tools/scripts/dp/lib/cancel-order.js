@@ -1,7 +1,5 @@
-"use strict";
-
-var chalk = require("chalk");
-var debugOptions = require("../../debug-options");
+import chalk from 'chalk';
+import debugOptions from '../../debug-options';
 
 function cancelOrder(augur, orderId, orderType, marketId, outcome, auth, callback) {
   augur.api.Orders.getAmount({ _orderId: orderId }, function (err, amount) {
@@ -25,4 +23,4 @@ function cancelOrder(augur, orderId, orderType, marketId, outcome, auth, callbac
   });
 }
 
-module.exports = cancelOrder;
+export default cancelOrder;
