@@ -1,8 +1,8 @@
-import yesNoOrderBook from './yes-no-order-book';
-import singleOutcomeAsks from './single-outcome-asks';
-import singleOutcomeBids from './single-outcome-bids';
+import yesNoOrderBook from "./yes-no-order-book";
+import singleOutcomeAsks from "./single-outcome-asks.json";
+import singleOutcomeBids from "./single-outcome-bids.json";
 
-function daysInMonth(month, year) {
+function daysInMonth(month:number, year:number) {
   return new Date(year, month, 0).getDate();
 }
 
@@ -268,7 +268,7 @@ export default [
       resolutionSource: "https://www.esrl.noaa.gov/gmd/ccgg/trends_ch4",
       tags: ["climate", "atmosphere"],
       longDescription:
-        'Vast quantities of methane are normally locked into the Earth\'s crust on the continental plateaus in one of the many deposits consisting of compounds of methane hydrate, a solid precipitated combination of methane and water much like ice. Because the methane hydrates are unstable, except at cool temperatures and high (deep) pressures, scientists have observed smaller "burps" due to tectonic events. Studies suggest the huge release of natural gas could be a major climatological trigger, methane itself being a greenhouse gas many times more powerful than carbon dioxide. References: https://en.wikipedia.org/wiki/Anoxic_event, https://en.wikipedia.org/wiki/Atmospheric_methane, https://en.wikipedia.org/wiki/Clathrate_gun_hypothesis',
+        "Vast quantities of methane are normally locked into the Earth's crust on the continental plateaus in one of the many deposits consisting of compounds of methane hydrate, a solid precipitated combination of methane and water much like ice. Because the methane hydrates are unstable, except at cool temperatures and high (deep) pressures, scientists have observed smaller \"burps\" due to tectonic events. Studies suggest the huge release of natural gas could be a major climatological trigger, methane itself being a greenhouse gas many times more powerful than carbon dioxide. References: https://en.wikipedia.org/wiki/Anoxic_event, https://en.wikipedia.org/wiki/Atmospheric_methane, https://en.wikipedia.org/wiki/Clathrate_gun_hypothesis",
       _scalarDenomination: "parts-per-billion"
     }
   },

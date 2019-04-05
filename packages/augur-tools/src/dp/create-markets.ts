@@ -1,24 +1,18 @@
-#!/usr/bin/env node
 /**
  * Create a handful of canned markets for us to test with.
  */
 
-#!/usr/bin/env node
-/**
- * Create a handful of canned markets for us to test with.
- */
+import chalk from "chalk";
 
-import chalk from 'chalk';
+import Augur from "augur.js";
+import createMarkets from "./lib/create-markets";
+import { getPrivateKey } from "./lib/get-private-key";
+import connectionEndpoints from "../connection-endpoints";
+import debugOptions from "../debug-options";
 
-import Augur from 'augur.js';
-import createMarkets from './lib/create-markets';
-import { getPrivateKey } from './lib/get-private-key';
-import connectionEndpoints from '../connection-endpoints';
-import debugOptions from '../debug-options';
+const keystoreFilePath = process.argv[2];
 
-var keystoreFilePath = process.argv[2];
-
-var augur = new Augur();
+const augur = new Augur();
 
 augur.rpc.setDebugOptions(debugOptions);
 

@@ -1,37 +1,47 @@
-import fs from 'fs';
-import chalk from 'chalk';
-import keythereum from 'keythereum';
-import speedomatic from 'speedomatic';
-import readlineSync from 'readline-sync';
-import debugOptions from '../../debug-options';
+import fs from "fs";
+import chalk from "chalk";
+import keythereum from "keythereum";
+import speedomatic from "speedomatic";
+import readlineSync from "readline-sync";
+import debugOptions from "../../debug-options";
 
-function getPrivateKeyFromString(privateKey) {
-  privateKey = Buffer.from(speedomatic.strip0xPrefix(privateKey), "hex");
-  let address = keythereum.privateKeyToAddress(privateKey);
-  if (debugOptions.cannedMarkets) console.log(chalk.green.dim("sender:"), chalk.green(address));
-  return { accountType: "privateKey", signer: privateKey, address: address };
+interface Account {
+  accountType: string;
+  signer: string;
+  address: string;
 }
 
-function getPrivateKeyFromEnv() {
+export function getPrivateKeyFromEnv() {
   return getPrivateKeyFromString(process.env.ETHEREUM_PRIVATE_KEY);
 }
 
-function getPrivateKeyFromKeystoreFile(keystoreFilePath, callback) {
-  fs.readFile(keystoreFilePath, function (err, keystoreJson) {
-    if (err) callback(err);
-    let keystore = JSON.parse(keystoreJson);
-    let address = speedomatic.formatEthereumAddress(keystore.address);
-    if (debugOptions.cannedMarkets) console.log(chalk.green.dim("sender:"), chalk.green(address));
-    keythereum.recover(process.env.ETHEREUM_PASSWORD || readlineSync.question("Password: ", { hideEchoBack: true }), keystore, function (privateKey) {
-      if (privateKey == null || privateKey.error) {
-        return callback(new Error("private key decryption failed"));
-      }
-      callback(null, { accountType: "privateKey", signer: privateKey, address: address });
+export async function getPrivateKeyFromString(privateKey:string):Promise<Account> {
+  const signer = Buffer.from(speedomatic.strip0xPrefix(privateKey), "hex").toString();
+  const address = keythereum.privateKeyToAddress(privateKey);
+  if (debugOptions.cannedMarkets) console.log(chalk.green.dim("sender:"), chalk.green(address));
+  return { accountType: "privateKey", signer, address };
+}
+
+
+
+export async function getPrivateKeyFromKeystoreFile(keystoreFilePath: string): Promise<Account> {
+  return new Promise<Account>((resolve, reject) => {
+    fs.readFile(keystoreFilePath, function(err, keystoreJson:Buffer) {
+      if (err) reject(err);
+      let keystore = keystoreJson.toJSON();
+      let address = speedomatic.formatEthereumAddress(keystore.address);
+      if (debugOptions.cannedMarkets) console.log(chalk.green.dim("sender:"), chalk.green(address));
+      keythereum.recover(process.env.ETHEREUM_PASSWORD || readlineSync.question("Password: ", { hideEchoBack: true }), keystore, function(privateKey:string) {
+        if (privateKey == null || privateKey.error) {
+          reject(new Error("private key decryption failed"));
+        }
+        resolve({ accountType: "privateKey", signer: privateKey, address: address });
+      });
     });
   });
 }
 
-function getPrivateKey(keystoreFilePath, callback) {
+export async function getPrivateKey(keystoreFilePath: string, callback) {
   if (process.env.ETHEREUM_PRIVATE_KEY != null) {
     try {
       callback(null, getPrivateKeyFromEnv());
@@ -43,4 +53,3 @@ function getPrivateKey(keystoreFilePath, callback) {
   }
 }
 
-export { getPrivateKey, getPrivateKeyFromEnv, getPrivateKeyFromString };

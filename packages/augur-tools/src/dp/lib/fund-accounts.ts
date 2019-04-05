@@ -1,5 +1,5 @@
-import async from 'async';
-import debugOptions from '../../debug-options';
+import async from "async";
+import debugOptions from "../../debug-options";
 
 function fundAccounts(
   augur,
@@ -24,7 +24,8 @@ function fundAccounts(
         etherToSend: etherFundingPerAccount,
         from: auth.address,
         to: accountToFund,
-        onSent: () => {},
+        onSent: () => {
+        },
         onSuccess: function() {
           nextAccountToFund();
         },

@@ -1,8 +1,8 @@
-import chalk from 'chalk';
-import immutableDelete from 'immutable-delete';
-import printTransactionStatus from './print-transaction-status';
-import speedomatic from 'speedomatic';
-import debugOptions from '../../debug-options';
+import chalk from "chalk";
+import immutableDelete from "immutable-delete";
+import printTransactionStatus from "./print-transaction-status";
+import speedomatic from "speedomatic";
+import debugOptions from "../../debug-options";
 
 function createMarket(
   augur,

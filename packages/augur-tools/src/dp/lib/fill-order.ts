@@ -1,9 +1,9 @@
-import async from 'async';
-import BigNumber from 'bignumber.js';
-import chalk from 'chalk';
-import speedomatic from 'speedomatic';
-import getOrderToFill from './get-order-to-fill';
-import debugOptions from '../../debug-options';
+import async from "async";
+import BigNumber from "bignumber.js";
+import chalk from "chalk";
+import speedomatic from "speedomatic";
+import getOrderToFill from "./get-order-to-fill";
+import debugOptions from "../../debug-options";
 
 function fillOrder(
   augur,
@@ -90,7 +90,8 @@ function fillOrder(
                   _outcome: outcomeToTrade,
                   _tradeGroupId: augur.trading.generateTradeGroupId(),
                   doNotCreateOrders: true,
-                  onSent: () => {},
+                  onSent: () => {
+                  },
                   onSuccess: function(tradeAmountRemaining) {
                     if (debugOptions.cannedMarkets) {
                       console.log(
