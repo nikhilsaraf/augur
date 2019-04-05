@@ -39,9 +39,9 @@ export async function startAugurListeners(augur: Augur): Promise<BlockAndLogStre
         logs.forEach(onRemove);
       });
   });
-  //
-  // const block = await dependencies.getBlockByNumber(uploadBlockNumber);
-  // await blockAndLogStreamerListener.onNewBlock(block);
+
+  const block = await dependencies.getBlockByNumber(uploadBlockNumber);
+  await blockAndLogStreamerListener.onNewBlock(block);
 
   return blockAndLogStreamerListener;
 }
