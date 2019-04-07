@@ -40,8 +40,13 @@ export async function startAugurListeners(augur: Augur): Promise<BlockAndLogStre
       });
   });
 
-  const block = await dependencies.getBlockByNumber(uploadBlockNumber);
-  await blockAndLogStreamerListener.onNewBlock(block);
+  const currentBlock = await augur.provider.getBlockNumber();
+
+  for (let i = uploadBlockNumber; i < currentBlock; i = i + 25) {
+    console.log(`Current block: ${i}`);
+    const block = await dependencies.getBlockByNumber(i);
+    await blockAndLogStreamerListener.onNewBlock(block);
+  }
 
   return blockAndLogStreamerListener;
 }
