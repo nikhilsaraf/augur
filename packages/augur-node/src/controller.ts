@@ -1,7 +1,6 @@
 import { Augur, ErrorCallback, GenericCallback } from "./types";
 import { UploadBlockNumbers } from "@augurproject/artifacts";
 
-
 import Knex from "knex";
 import * as path from "path";
 import { EventEmitter } from "events";
@@ -17,6 +16,7 @@ import { ConnectOptions } from "./setup/connectOptions";
 import { LoggerInterface } from "./utils/logger/logger";
 import { clearOverrideTimestamp } from "./blockchain/process-block";
 import { BlockAndLogStreamerListener } from "@augurproject/state/build/db/BlockAndLogStreamerListener";
+import { bulkSyncAugurNodeWithBlockchain } from "./blockchain/bulk-sync-augur-node-with-blockchain";
 
 export interface SyncedBlockInfo {
   lastSyncBlockNumber: number;
@@ -52,6 +52,9 @@ export class AugurNodeController {
     try {
       ({knex: this.db } = await createDbAndConnect(errorCallback, this.augur, this.networkConfig, this.databaseDir));
       this.controlEmitter.emit(ControlMessageType.BulkSyncStarted);
+
+      const handoffBlockNumber = await bulkSyncAugurNodeWithBlockchain(this.db, this.augur, 720);
+      this.controlEmitter.emit(ControlMessageType.BulkSyncFinished);
 
       this.serverResult = runServer(this.db, this.augur, this.controlEmitter);
       this.logger.info("Bulk sync with blockchain complete.");
