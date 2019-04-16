@@ -148,10 +148,6 @@ async function processTrades(tradeData: Array<TradeData>, market: GenericAugurIn
             marketId: market.address,
         });
     
-        console.log(`TRADING POSITIONS PER MARKET: ${JSON.stringify(tradingPositionsPerMarket)}`);
-        console.log(`FROZEN FUNDS TOTAL: ${frozenFundsTotal}`);
-        //console.log(`TRADE RECEIVED: ${JSON.stringify(tradingPositions[0])}`);
-        //console.log(`TRADE EXPEXTED: ${JSON.stringify(trade)}`);
         await expect(tradingPositions[0].netPosition).toEqual(trade.position.toString());
         await expect(tradingPositions[0].averagePrice).toEqual(trade.avgPrice.toString());
         await expect(tradingPositions[0].realized).toEqual(trade.realizedPL.toString());
